@@ -1,0 +1,37 @@
+import subprocess
+device_id = str(subprocess.check_output('wmic csproduct get uuid'), 'utf-8').split('\n')[1].strip()
+print(device_id)
+
+import time
+time.time()
+time = time.time()
+print (time)
+
+session_id = time
+
+from amplitude import AmplitudeLogger
+api_key = '75cc91197328a70cde60cbafc27325d8'
+amplitude_logger = amplitude.AmplitudeLogger(api_key)
+
+event_args = {"event_type": "Запуск скрипта", "device_id": (device_id), "session_id": (session_id), "time": (time)}
+
+event = amplitude_logger.create_event(**event_args)
+amplitude_logger.log_event(event)
+
+import datetime
+start = datetime.datetime.now()
+
+
+a = 1
+while a == 1:
+
+    print ("Время старта скрипта:", start)
+    
+    import datetime
+    start2 = datetime.datetime.now()
+    print ("Время со старта скрипта:", start2 - start)
+
+    print ("ID скрипта:", os.getpid())
+    
+    import time
+    time.sleep(5)
